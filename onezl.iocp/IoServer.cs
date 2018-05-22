@@ -1497,21 +1497,30 @@ namespace onezl.iocp
     {
       try
       {
-        e.SetBuffer(e.Buffer, 0, e.Buffer.Length);
-        e.UserToken = null;
-        e.AcceptSocket = null;
+        try
+        {
+          e.SetBuffer(e.Buffer, 0, e.Buffer.Length);
+          e.UserToken = null;
+          e.AcceptSocket = null;
 
-        DateTime dt = new DateTime();
+          DateTime dt = new DateTime();
 
-        _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
+          _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
 
-        ioContextPool.Push(e);
+          ioContextPool.Push(e);
 
+        }
+        catch (InvalidOperationException ex)//报错的原因:清除僵尸socket后,把SocketAsyncEventArgs放回到池子里,又被其他的socket所使用,这个时候SetBuffer会报错.
+        {
+          Logger.WriteLog("PushSocketAsyncEventArgsToPool:  " + ex.Message);
+        }
       }
-      catch (InvalidOperationException ex)//报错的原因:清除僵尸socket后,把SocketAsyncEventArgs放回到池子里,又被其他的socket所使用,这个时候SetBuffer会报错.
+      catch (Exception ex)
       {
-        Logger.WriteLog("PushSocketAsyncEventArgsToPool:  " + ex.Message);
+
+        
       }
+      
     }
     #endregion
 
