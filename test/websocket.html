@@ -1,118 +1,118 @@
 
   <!DOCTYPE html>
  
-<html>
- 
-<head>
-  
-  <title>c#ºó¶ËWebSocketµÄTomcatÊµÏÖ</title>
-  <style>
-
+  <html>
    
-  </style>
-</head>
-
-<body>
-   
-  <div>
-    Welcome<br /><input id="text" type="text" />
-    <button onclick="send()">·¢ËÍÏûÏ¢</button>
-    <span>×¢²áÓÃ»§·¢ËÍ£ºname:Ğ¡Àî   &nbsp;&nbsp;&nbsp;Õë¶ÔÄ³ÈË·¢ÏûÏ¢ÃüÁî£º@Ğ¡Àî ÄãºÃ°¡ÏÖÔÚÔÚ¸ÉÂïÄØ</span>
-    </div>
- 
-     <br />
-  <div style="border:1px solid #17acf8;height:500px;padding:3px;font-">
-    <div class="div1" id="userrlist" style="overflow-y:scroll;height:500px;float:left; width:20%;">
-      ÓÃ»§ÁĞ±í£¬µÇÂ¼ºó¿É²é¿´
-
-    </div>
-
-
-    <div class="div2" style="overflow-y:hidden;height:500px;float:left;width:2%; ">
-
-    </div>
-    <div class="div2" id="message" style="overflow-y:scroll;height:500px;float:left;width:78%; ">
-      ÏûÏ¢£º<br />
-    </div>
-  </div>
-</body>
-
-<script type="text/javascript">
-
-
-     var websocket = null;
-     //ÅĞ¶Ïµ±Ç°ä¯ÀÀÆ÷ÊÇ·ñÖ§³ÖWebSocket
-     if ('WebSocket' in window) {
-       websocket = new WebSocket("ws://127.0.0.1:6789");
-     }
-     else {
-         alert('µ±Ç°ä¯ÀÀÆ÷ Not support websocket')
-     }
-
-     //Á¬½Ó·¢Éú´íÎóµÄ»Øµ÷·½·¨
-     websocket.onerror = function () {
-         setMessageInnerHTML("WebSocketÁ¬½Ó·¢Éú´íÎó");
-     };
-
-     //Á¬½Ó³É¹¦½¨Á¢µÄ»Øµ÷·½·¨
-     websocket.onopen = function () {
-         setMessageInnerHTML("WebSocketÁ¬½Ó³É¹¦");
-     }
-
-     //½ÓÊÕµ½ÏûÏ¢µÄ»Øµ÷·½·¨
-     websocket.onmessage = function (event) {
-       var temp = event.data.split(',');
-       if (temp[0] == "userlist")
-       {
-         var str = "ÓÃ»§ÁĞ±í:<br/>";
-         for (var i = 1; i < temp.length; i++) {
-           str = str + temp[i]+ '<br/>';
-          
-         }
-         document.getElementById('userrlist').innerHTML = str;
-       }
-       else
-       {
-         setMessageInnerHTML(event.data);
-       }
-     }
-
-     //Á¬½Ó¹Ø±ÕµÄ»Øµ÷·½·¨
-     websocket.onclose = function () {
-         setMessageInnerHTML("WebSocketÁ¬½Ó¹Ø±Õ");
-     }
-
-     //¼àÌı´°¿Ú¹Ø±ÕÊÂ¼ş£¬µ±´°¿Ú¹Ø±ÕÊ±£¬Ö÷¶¯È¥¹Ø±ÕwebsocketÁ¬½Ó£¬·ÀÖ¹Á¬½Ó»¹Ã»¶Ï¿ª¾Í¹Ø±Õ´°¿Ú£¬server¶Ë»áÅ×Òì³£¡£
-     window.onbeforeunload = function () {
-         closeWebSocket();
-     }
-
-     //½«ÏûÏ¢ÏÔÊ¾ÔÚÍøÒ³ÉÏ
-     function setMessageInnerHTML(innerHTML) {
-       document.getElementById('message').innerHTML += innerHTML + '<br/>';
-
-
-       var div = document.getElementById('message');
-   
-       div.scrollTop = div.scrollHeight;
-     }
-
-     //¹Ø±ÕWebSocketÁ¬½Ó
-     function closeWebSocket() {
-         websocket.close();
-     }
-
-     //·¢ËÍÏûÏ¢
-     function send() {
-     
-       for (var i = 0; i < 1; i++) {
-         var message = document.getElementById('text').value;
-         websocket.send(message);
-       }
-        
+  <head>
     
-        
-     }
- </script>
-
-</html>
+    <title>c#åç«¯WebSocketçš„Tomcatå®ç°</title>
+    <style>
+  
+     
+    </style>
+  </head>
+  
+  <body>
+     
+    <div>
+      Welcome<br /><input id="text" type="text" />
+      <button onclick="send()">å‘é€æ¶ˆæ¯</button>
+      <span>æ³¨å†Œç”¨æˆ·å‘é€ï¼šname:å°æ   &nbsp;&nbsp;&nbsp;é’ˆå¯¹æŸäººå‘æ¶ˆæ¯å‘½ä»¤ï¼š@å°æ ä½ å¥½å•Šç°åœ¨åœ¨å¹²å˜›å‘¢</span>
+      </div>
+   
+       <br />
+    <div style="border:1px solid #17acf8;height:500px;padding:3px;font-">
+      <div class="div1" id="userrlist" style="overflow-y:scroll;height:500px;float:left; width:20%;">
+        ç”¨æˆ·åˆ—è¡¨ï¼Œç™»å½•åå¯æŸ¥çœ‹
+  
+      </div>
+  
+  
+      <div class="div2" style="overflow-y:hidden;height:500px;float:left;width:2%; ">
+  
+      </div>
+      <div class="div2" id="message" style="overflow-y:scroll;height:500px;float:left;width:78%; ">
+        æ¶ˆæ¯ï¼š<br />
+      </div>
+    </div>
+  </body>
+  
+  <script type="text/javascript">
+  
+  
+       var websocket = null;
+       //åˆ¤æ–­å½“å‰æµè§ˆå™¨æ˜¯å¦æ”¯æŒWebSocket
+       if ('WebSocket' in window) {
+         websocket = new WebSocket("ws://127.0.0.1:6789");
+       }
+       else {
+           alert('å½“å‰æµè§ˆå™¨ Not support websocket')
+       }
+  
+       //è¿æ¥å‘ç”Ÿé”™è¯¯çš„å›è°ƒæ–¹æ³•
+       websocket.onerror = function () {
+           setMessageInnerHTML("WebSocketè¿æ¥å‘ç”Ÿé”™è¯¯");
+       };
+  
+       //è¿æ¥æˆåŠŸå»ºç«‹çš„å›è°ƒæ–¹æ³•
+       websocket.onopen = function () {
+           setMessageInnerHTML("WebSocketè¿æ¥æˆåŠŸ");
+       }
+  
+       //æ¥æ”¶åˆ°æ¶ˆæ¯çš„å›è°ƒæ–¹æ³•
+       websocket.onmessage = function (event) {
+         var temp = event.data.split(',');
+         if (temp[0] == "userlist")
+         {
+           var str = "ç”¨æˆ·åˆ—è¡¨:<br/>";
+           for (var i = 1; i < temp.length; i++) {
+             str = str + temp[i]+ '<br/>';
+            
+           }
+           document.getElementById('userrlist').innerHTML = str;
+         }
+         else
+         {
+           setMessageInnerHTML(event.data);
+         }
+       }
+  
+       //è¿æ¥å…³é—­çš„å›è°ƒæ–¹æ³•
+       websocket.onclose = function () {
+           setMessageInnerHTML("WebSocketè¿æ¥å…³é—­");
+       }
+  
+       //ç›‘å¬çª—å£å…³é—­äº‹ä»¶ï¼Œå½“çª—å£å…³é—­æ—¶ï¼Œä¸»åŠ¨å»å…³é—­websocketè¿æ¥ï¼Œé˜²æ­¢è¿æ¥è¿˜æ²¡æ–­å¼€å°±å…³é—­çª—å£ï¼Œserverç«¯ä¼šæŠ›å¼‚å¸¸ã€‚
+       window.onbeforeunload = function () {
+           closeWebSocket();
+       }
+  
+       //å°†æ¶ˆæ¯æ˜¾ç¤ºåœ¨ç½‘é¡µä¸Š
+       function setMessageInnerHTML(innerHTML) {
+         document.getElementById('message').innerHTML += innerHTML + '<br/>';
+  
+  
+         var div = document.getElementById('message');
+     
+         div.scrollTop = div.scrollHeight;
+       }
+  
+       //å…³é—­WebSocketè¿æ¥
+       function closeWebSocket() {
+           websocket.close();
+       }
+  
+       //å‘é€æ¶ˆæ¯
+       function send() {
+       
+         for (var i = 0; i < 1; i++) {
+           var message = document.getElementById('text').value;
+           websocket.send(message);
+         }
+          
+      
+          
+       }
+   </script>
+  
+  </html>
