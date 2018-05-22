@@ -27,7 +27,9 @@ namespace onezl.iocp
   {
 
     #region 变量
-
+    /// <summary> 是否允许动态扩充连接
+    /// </summary>
+    private bool AutoConnection=false;
 
     /// <summary> 接收触发的事件
     /// </summary>
@@ -98,11 +100,12 @@ namespace onezl.iocp
     /// </summary>
     /// <param name="numConnections">服务器的最大连接数据</param>
     /// <param name="bufferSize"></param>
-    public IoServer(Int32 numConnections, Int32 bufferSize)
+    public IoServer(Int32 numConnections, Int32 bufferSize,bool autoconnect=false)
     {
 
       this.numConnections = numConnections;
       this.bufferSize = bufferSize;
+      this.AutoConnection=autoconnect;
 
       this.ioContextPool = new IoContextPool(numConnections);
 
@@ -499,7 +502,7 @@ namespace onezl.iocp
             if (item.Key.BytesTransferred <= 0 || Name == "RegClean")
             {
               //释放
-              CloseClientSocketTopool(item.Key.UserToken as Socket, item.Key);
+              ShutdownSocket(item.Key.UserToken as Socket, item.Key);
 
             }
 
@@ -558,13 +561,13 @@ namespace onezl.iocp
 
                 SocketAsyncEventArgs ioContext = this.ioContextPool.Pop();
                 if (ioContext != null)
-                {
-                  _zombieSocketAsyncEventArgsDic.TryAdd(ioContext, DateTime.Now);
+                {                 
                   if (ioContextPool.GetCount() < 1000)
                   {
                     Logger.WriteLog("TcpServerNew" + ioContextPool.GetCount().ToString());
                   }
                   ioContext.UserToken = e;
+                   _zombieSocketAsyncEventArgsDic.TryAdd(ioContext, DateTime.Now);
 
                   if (!e.ReceiveAsync(ioContext))
                   {
@@ -575,6 +578,7 @@ namespace onezl.iocp
                 else        //已经达到最大客户连接数量，在这接受连接，发送“连接已经达到最大数”，然后断开连接
                 {
                   #region 负载
+                  if(this.AutoConnection){
                   ioContext = new SocketAsyncEventArgs();
                   //注册异步接收完成后的事件
                   ioContext.Completed += new EventHandler<SocketAsyncEventArgs>(OnIOCompleted);
@@ -586,6 +590,7 @@ namespace onezl.iocp
                   if (!e.ReceiveAsync(ioContext))
                   {
                     this.ProcessReceive(ioContext);
+                  }
                   }
                   #endregion
                 }
@@ -1359,7 +1364,7 @@ namespace onezl.iocp
       {
         ipport = s.RemoteEndPoint.ToString();
       }
-      catch//说明是客户端还连接着,服务器端主动断开。
+      catch(Exception ex)//说明是客户端还连接着,服务器端主动断开。
       {
 
         PushSocketAsyncEventArgsToPool(e);
@@ -1460,26 +1465,38 @@ namespace onezl.iocp
     {
       try
       {
-        try
-        {
-          e.SetBuffer(e.Buffer, 0, e.Buffer.Length);
-          e.UserToken = null;
-          e.AcceptSocket = null;
 
-          DateTime dt = new DateTime();
+            
+             
+                  try{
+                         
+                                e.SetBuffer(e.Buffer, 0, e.Buffer.Length);
+                                e.UserToken = null;
+                                e.AcceptSocket = null;
+                                DateTime dt = new DateTime();
+                                _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
+                                ioContextPool.Push(e);
 
-          _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
 
-          ioContextPool.Push(e);
+                  }
+                  catch(Exception es)
+                  { 
+                    
+                              
+                                e.UserToken = null;
+                                e.AcceptSocket = null;
+                                DateTime dt = new DateTime();
+                                _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
+                                ioContextPool.Push(e);
+                                  
+                            
+                  }   
 
+                           
+       
+             
 
-        }
-        catch(Exception ex) {
-          
-        }
-
-        s.Shutdown(SocketShutdown.Both);
-        s.Close();//当客户端未断开,服务器端调用Close方法时,会模拟客户端发送0字节到服务端,服务器端接收到,执行断开操作.
+       
 
 
       }
@@ -1488,6 +1505,32 @@ namespace onezl.iocp
 
       }
     }
+
+     private void ShutdownSocket(Socket s, SocketAsyncEventArgs e)
+     {
+       try{
+         DateTime dt = new DateTime();
+         _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
+         s.Shutdown(SocketShutdown.Both);
+         s.Close();//当客户端未断开,服务器端调用Close方法时,会模拟客户端发送0字节到服务端,服务器端接收到,执行断开操作.
+       }
+       catch(Exception ex)
+       {
+         try{
+            e.SetBuffer(e.Buffer, 0, e.Buffer.Length);
+           e.UserToken = null;
+           e.AcceptSocket = null;
+            DateTime dt = new DateTime();
+             _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
+               ioContextPool.Push(e);
+         }
+         catch(Exception exs){
+          
+         }
+
+       }
+     
+     }
 
     #region 清除僵尸连接
     /// <summary> 把SocketAsyncEventArgs放回到接收池里
