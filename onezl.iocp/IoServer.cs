@@ -1508,9 +1508,7 @@ namespace onezl.iocp
 
      private void ShutdownSocket(Socket s, SocketAsyncEventArgs e)
      {
-       try{
-         DateTime dt = new DateTime();
-         _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
+       try{        
          s.Shutdown(SocketShutdown.Both);
          s.Close();//当客户端未断开,服务器端调用Close方法时,会模拟客户端发送0字节到服务端,服务器端接收到,执行断开操作.
        }
@@ -1529,6 +1527,8 @@ namespace onezl.iocp
         //  }
 
        }
+        DateTime dt = new DateTime();
+         _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
      
      }
 
