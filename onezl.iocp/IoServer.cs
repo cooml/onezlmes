@@ -85,7 +85,7 @@ namespace onezl.iocp
     /// <summary>记录新进来的连接
     /// </summary>
     //public Stack<Socket> _listenCon = new Stack<Socket>();
-    public Queue<Socket> _listenCon = new Queue<Socket>();
+    private Queue<Socket> _listenCon = new Queue<Socket>();
 
     /// <summary>记录发送数据的连接
     /// </summary>
@@ -951,7 +951,7 @@ namespace onezl.iocp
     /// <summary> 处理接收队列中的消息
     /// </summary>
     /// <param name="obj">队列约定编号</param>
-    public void DoWorkForQueue(object obj)
+    private void DoWorkForQueue(object obj)
     {
       int workQueueIndex = Convert.ToInt32(obj);
       WorkQueue<AsyncSocketUserToken> que = _workQueueList[workQueueIndex];
@@ -1037,7 +1037,7 @@ namespace onezl.iocp
     /// <summary> 处理发送消息队列
     /// </summary>
     /// <param name="obj"></param>
-    public void DoWorkForSendQu(object obj)
+    private void DoWorkForSendQu(object obj)
     {
       int sendQueIndex = Convert.ToInt32(obj);
       SendWorkQueue<AsynSocketSendUserToken> que = _sendWorkList[sendQueIndex];
@@ -1086,7 +1086,7 @@ namespace onezl.iocp
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    void sockasyn_Completed(object sender, SocketAsyncEventArgs e)
+    private void sockasyn_Completed(object sender, SocketAsyncEventArgs e)
     {
       ProcessSendSocket(e);
     }
@@ -1105,7 +1105,7 @@ namespace onezl.iocp
     /// <summary> 把接收工作承载对象放回到池里
     /// </summary>
     /// <param name="asyncSocketUserToken"></param>
-    public void GiveBackAsyncSocketUserToken(AsyncSocketUserToken asyncSocketUserToken)
+    private void GiveBackAsyncSocketUserToken(AsyncSocketUserToken asyncSocketUserToken)
     {
       asyncSocketUserToken.QueueId = -1;
       asyncSocketUserToken.ConnectSocketHandle = 0;
@@ -1125,7 +1125,7 @@ namespace onezl.iocp
     /// <summary> 把发送工作承载对象放回到池里
     /// </summary>
     /// <param name="asyncSocketUserToken"></param>
-    public void GiveBackAsynSocketSendUserToken(AsynSocketSendUserToken asyncSocketUserToken)
+    private void GiveBackAsynSocketSendUserToken(AsynSocketSendUserToken asyncSocketUserToken)
     {
       asyncSocketUserToken.ConnectSocketHandle = 0;
       asyncSocketUserToken.ReceiveBuffer = null;
@@ -1221,7 +1221,7 @@ namespace onezl.iocp
     /// <summary>清理不在线用户
     /// </summary>
     /// <param name="socket">清理用户的Socket</param>
-    public void CleanDic(SocketAsyncEventArgs e)
+    private void CleanDic(SocketAsyncEventArgs e)
     {
       Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
       try
@@ -1237,7 +1237,7 @@ namespace onezl.iocp
       }
     }
 
-    public void CleanDic(AsyncSocketUserToken e)
+    private void CleanDic(AsyncSocketUserToken e)
     {
       try
       {
@@ -1270,7 +1270,7 @@ namespace onezl.iocp
     /// </summary>
     /// <param name="QueueId">队列约定的id（找缓存区）</param>
     /// <param name="IpportStr">（缓冲区索引，目前是ip加端口号）</param>
-    public void CleandicBuffer(int QueueId, string IpportStr)
+    private void CleandicBuffer(int QueueId, string IpportStr)
     {
       try
       {
@@ -1288,13 +1288,36 @@ namespace onezl.iocp
     }
     #endregion
 
+    #region 连接掉线处理，处理000505系统命令
+    /// <summary>
+    /// 连接掉线处理，处理000505系统命令
+    /// </summary>
+    /// <param name="sck"></param>
+    public void ConnectDown(AsyncSocketUserToken sck)
+    {
+      this.CleandicBuffer(sck.QueueId, sck.IpportStr);//清空粘包缓存区
+      this.CloseClientSocketTopool((sck.ReceiveEventArgs.UserToken as Socket),
+                sck.ReceiveEventArgs);// //把异步对象清空，投入异步对象池中重新利用
+    }
+    #endregion
+    #region 处理000506系统命令，新的连接接入处理
+    /// <summary>
+    /// 新的连接接入,处理000506系统命令，新的连接接入处理
+    /// </summary>
+    /// <param name="sck"></param>
+    public void NewConnect(AsyncSocketUserToken sck)
+    {
+     this.CleandicBufferforConnect(sck.QueueId, sck.IpportStr, sck.ReceiveEventArgs); //清空粘包缓存区，并且返回池子
+    }
+    #endregion
+
 
     #region  清空指定的粘包处理的缓存区（暂且不用，这个可做主动掉线处理）
     /// <summary> 清空指定的粘包处理的缓存区
     /// </summary>
     /// <param name="QueueId">队列约定的id（找缓存区）</param>
     /// <param name="IpportStr">（缓冲区索引，目前是ip加端口号）</param>
-    public void CleandicBufferforConnect(int QueueId, string IpportStr, SocketAsyncEventArgs e)
+    private void CleandicBufferforConnect(int QueueId, string IpportStr, SocketAsyncEventArgs e)
     {
       try
       {
@@ -1479,7 +1502,7 @@ namespace onezl.iocp
     /// </summary>
     /// <param name="s"></param>
     /// <param name="e"></param>
-    public void CloseClientSocketTopool(Socket s, SocketAsyncEventArgs e)
+    private void CloseClientSocketTopool(Socket s, SocketAsyncEventArgs e)
     {
       try
       {

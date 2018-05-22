@@ -71,13 +71,15 @@ namespace Iocp
         switch (commandStr)
         {
 
+          case "000506"://系统新的连接接入，还没有任何消息
+            socketserver.NewConnect(SocketArg);
+            //  socketserver.RemoveZombieSocketAsyncEventArgs(SocketArg.ReceiveEventArgs);//针对Socket服务器,用户发送注册命令的时候从 僵尸字典里移除.很重要，只要身份注册后就需要调用
+            break;
+          case "000505"://掉线处理
 
-          case "000505":
+            socketserver.ConnectDown(SocketArg); //掉线处理，服务资源回收
+
             var ipstr = SocketArg.IpportStr;
-            socketserver.CleandicBuffer(SocketArg.QueueId, SocketArg.IpportStr); //清空粘包缓存区
-            socketserver.CloseClientSocketTopool((SocketArg.ReceiveEventArgs.UserToken as Socket),
-                SocketArg.ReceiveEventArgs); //把异步对象清空，投入异步对象池中重新利用
-
             var aaaa = new byte[0];
             websocketdatecahe.TryRemove(SocketArg.IpportStr, out aaaa);
 
@@ -104,12 +106,7 @@ namespace Iocp
 
 
             break;
-
-          case "000506":
-
-
-            socketserver.CleandicBufferforConnect(SocketArg.QueueId, SocketArg.IpportStr, SocketArg.ReceiveEventArgs); //清空粘包缓存区，并且返回池子
-            break;
+            
 
           case "000001"://注册身份命令 001[f.f]黎明
 
