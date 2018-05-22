@@ -493,7 +493,7 @@ namespace onezl.iocp
         try
         {
 
-          if ((DateTime.Now - item.Value).TotalMinutes > 3)
+          if ((DateTime.Now - item.Value).TotalMinutes >3)
           {
 
             if (item.Key.BytesTransferred <= 0 || Name == "RegClean")
@@ -1217,53 +1217,7 @@ namespace onezl.iocp
     }
     #endregion
 
-    #region 清理不在线用户
-    /// <summary>清理不在线用户
-    /// </summary>
-    /// <param name="socket">清理用户的Socket</param>
-    private void CleanDic(SocketAsyncEventArgs e)
-    {
-      Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-      try
-      {
-        socket = e.UserToken as Socket;
-      }
-      catch
-      {
-      }
-      finally
-      {
-        CloseClientSocket(socket, e);
-      }
-    }
-
-    private void CleanDic(AsyncSocketUserToken e)
-    {
-      try
-      {
-        //判断当前队列消息的句柄是否还和异步对象的句柄是否一致，如果不一致说明当前消息队列中的发送者已经掉线，并且socket异步已经被新的请求使用
-        if (e.ConnectSocketHandle == (e.ReceiveEventArgs.UserToken as Socket).Handle.ToInt32())
-        {
-          Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-          try
-          {
-            socket = e.ReceiveEventArgs.UserToken as Socket;
-          }
-          catch
-          {
-          }
-          finally
-          {
-            CloseClientSocket(socket, e.ReceiveEventArgs);
-          }
-        }
-      }
-      catch
-      {
-      }
-    }
-    #endregion
+   
 
     #region  清空指定的粘包处理的缓存区
     /// <summary> 清空指定的粘包处理的缓存区
@@ -1520,7 +1474,9 @@ namespace onezl.iocp
 
 
         }
-        catch { }
+        catch(Exception ex) {
+          
+        }
 
         s.Shutdown(SocketShutdown.Both);
         s.Close();//当客户端未断开,服务器端调用Close方法时,会模拟客户端发送0字节到服务端,服务器端接收到,执行断开操作.
