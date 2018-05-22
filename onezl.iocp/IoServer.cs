@@ -1516,17 +1516,17 @@ namespace onezl.iocp
        }
        catch(Exception ex)
        {
-         try{
-            e.SetBuffer(e.Buffer, 0, e.Buffer.Length);
-           e.UserToken = null;
-           e.AcceptSocket = null;
-            DateTime dt = new DateTime();
-             _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
-               ioContextPool.Push(e);
-         }
-         catch(Exception exs){
+        //  try{
+        //     e.SetBuffer(e.Buffer, 0, e.Buffer.Length);
+        //    e.UserToken = null;
+        //    e.AcceptSocket = null;
+        //     DateTime dt = new DateTime();
+        //      _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
+        //        ioContextPool.Push(e);
+        //  }
+        //  catch(Exception exs){
           
-         }
+        //  }
 
        }
      
