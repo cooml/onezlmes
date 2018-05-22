@@ -89,8 +89,8 @@ namespace onezl.iocp
           }
           else
           {
-            return new SocketAsyncEventArgs();
-            //return null;
+            return new SocketAsyncEventArgs();//当连接超限的时候不能再连
+          //  return null;//开启连接超限负载的开关
 
           }
 
