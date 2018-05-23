@@ -1,5 +1,5 @@
 ﻿
-#define zhanbao
+#define buzhanbao
 
 
 //#define zhanbao
