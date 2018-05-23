@@ -1,5 +1,5 @@
 ﻿
-#define buzhanbao
+#define zhanbao
 
 
 //#define zhanbao
@@ -544,8 +544,17 @@ namespace onezl.iocp
     /// <param name="socketArg"></param>
     public void RemoveZombieSocketAsyncEventArgs(SocketAsyncEventArgs socketArg)
     {
-      DateTime dt = DateTime.Now;
-      _zombieSocketAsyncEventArgsDic.TryRemove(socketArg, out dt);
+      try
+      {
+        DateTime dt = DateTime.Now;
+        _zombieSocketAsyncEventArgsDic.TryRemove(socketArg, out dt);
+      }
+      catch (Exception ex)
+      {
+
+        Logger.WriteLog("RemoveZombieSocketAsyncEventArgs ex:" + ex.Message);
+      }
+    
     }
 
     #region 定时清理僵尸连接
@@ -807,6 +816,7 @@ namespace onezl.iocp
     private void AllDownLine(Socket s, SocketAsyncEventArgs e)
     {
       ReduceConnectsock();
+      this.RemoveZombieSocketAsyncEventArgs(e);
 
       string ipport = string.Empty;
       try
@@ -1043,38 +1053,46 @@ namespace onezl.iocp
 
 #if zhanbao
 
-
-              switch (asyncUserToken.issystemorder)
+              try
               {
-                case "0":
-                  List<byte[]> listcompletebt = StickingBag.MakeStickingBag(asyncUserToken.ReceiveBuffer, asyncUserToken.IpportStr, GetDicBuffer(asyncUserToken.QueueId));
-                  for (int i = 0; i < listcompletebt.Count; i++)
-                  {
-                    if (ReceiveEvent != null)
+                switch (asyncUserToken.issystemorder)
+                {
+                  case "0":
+                    List<byte[]> listcompletebt = StickingBag.MakeStickingBag(asyncUserToken.ReceiveBuffer, asyncUserToken.IpportStr, GetDicBuffer(asyncUserToken.QueueId));
+                    for (int i = 0; i < listcompletebt.Count; i++)
                     {
-                      try
+                      if (ReceiveEvent != null)
                       {
-                        ReceiveEvent(asyncUserToken, listcompletebt[i]);
-                      }
-                      catch (Exception ex)
-                      {
-                        Logger.WriteLog("DoWorkForQueue677:" + ex.Message);
+                        try
+                        {
+                          ReceiveEvent(asyncUserToken, listcompletebt[i]);
+                        }
+                        catch (Exception ex)
+                        {
+                          Logger.WriteLog("DoWorkForQueue677:" + ex.Message);
+                        }
                       }
                     }
-                  }
-              
-              break;
-                case "downline":
-                  ConnectDown(asyncUserToken);//清空粘包缓存区,和僵尸连接
-                  DownLineEvent(asyncUserToken);                
-                  break; 
-                  case "newconnect":
-                  this.CleandicBuffer(asyncUserToken.QueueId, asyncUserToken.IpportStr);//清空粘包缓存区
-                  break;
-                default:
-                  break;
-              }
 
+                    break;
+                  case "downline":
+                    ConnectDown(asyncUserToken);//清空粘包缓存区,和僵尸连接
+                    DownLineEvent(asyncUserToken);
+                    break;
+                  case "newconnect":
+                    this.CleandicBuffer(asyncUserToken.QueueId, asyncUserToken.IpportStr);//清空粘包缓存区
+                    break;
+                  default:
+                    break;
+                }
+
+              }
+              catch (Exception exzhanbao)
+              {
+
+                Logger.WriteLog("DoWorkForQueue exzhanbao exp:"+exzhanbao.Message);
+              }
+             
 #endif
 
 
@@ -1342,7 +1360,7 @@ namespace onezl.iocp
       {
         AsyncSocketUserToken asyncUserToken = null;
 
-        byte[] oldByteArr = System.Text.Encoding.UTF8.GetBytes("");
+        byte[] oldByteArr = new byte[0];
 
         asyncUserToken = GetAcceptSoc();
        
