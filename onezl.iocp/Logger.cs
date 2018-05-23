@@ -8,7 +8,7 @@ namespace onezl.iocp
     {
     public static void WriteLog(string logmes)
     {
-      Console.WriteLine("写日志：-----"+logmes);
+     Console.WriteLine("写日志：-----"+logmes);
     }
   }
 }

@@ -87,10 +87,10 @@ namespace Iocp
         //socketserver.PushSendQue(SocketArg.ReceiveEventArgs, Encoding.UTF8.GetBytes("HTTP/1.1 200 OK\r\nContent-Type:text/html;charset=utf-8\r\nContent-Length:18\r\n\r\nWelcome to tinyweb"));
         //   return;
 
-        Console.WriteLine("queueid:" + SocketArg.QueueId);
+       // Console.WriteLine("queueid:" + SocketArg.QueueId);
         string strAll = Encoding.UTF8.GetString(byteArr);
 
-        Console.WriteLine(strAll);
+        //Console.WriteLine(strAll);
         string appNum = strAll.Substring(0, 2);
         string commandStr = strAll.Substring(0, 6);
         string str = strAll.Substring(6);
@@ -159,7 +159,7 @@ namespace Iocp
                                    + "Connection: Upgrade" + Environment.NewLine
                                    + "Upgrade: websocket" + Environment.NewLine
                                    + "Sec-WebSocket-Accept: " + setWebSocketAccept + Environment.NewLine + Environment.NewLine);
-                Console.WriteLine(response);
+               // Console.WriteLine(response);
                 socketserver.PushSendQue(SocketArg.ReceiveEventArgs, Encoding.UTF8.GetBytes(response));
                 return;
               }

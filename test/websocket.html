@@ -104,12 +104,14 @@
   
        //发送消息
        function send() {
-       
-         for (var i = 0; i < 1; i++) {
-           var message = document.getElementById('text').value;
+         var message = document.getElementById('text').value;
+         if (message.lastIndexOf("@") > -1) {
+           for (var i = 0; i < 1000; i++) {
+             websocket.send(message+"_"+i);
+           }
+         } else {
            websocket.send(message);
          }
-          
       
           
        }
