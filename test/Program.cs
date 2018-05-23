@@ -29,11 +29,38 @@ namespace Iocp
       //socketserver.Start("127.0.0.1", 6789);
       socketserver.Start(6789);
       socketserver.ReceiveEvent = new onezl.iocp.ReceiveEventHandler(myfuncion);
+      socketserver.DownLineEvent = new onezl.iocp.DownLineHandler(Downline);
       socketserver.Name = "RegClean";
       Console.WriteLine("start");
     }
 
+    private static void Downline(onezl.iocp.AsyncSocketUserToken SocketArg)
+    {
+      var ipstr = SocketArg.IpportStr;
+      var aaaa = new byte[0];
+      websocketdatecahe.TryRemove(SocketArg.IpportStr, out aaaa);
 
+
+      if (userip.ContainsKey(ipstr))
+      {
+        foreach (var item in userlist)
+        {
+          if (item.Key != userip[ipstr])
+          {
+            DataFrame dfff = new DataFrame("用户：" + userip[ipstr] + "已经掉线");
+            socketserver.PushSendQue(item.Value, dfff.GetBytes());
+            DataFrame dfff1 = new DataFrame("userlist," + string.Join(",", userlist.Select(a => a.Key).Where(b => b != userip[ipstr])));
+            socketserver.PushSendQue(item.Value, dfff1.GetBytes());
+          }
+        }
+        var o = new SocketAsyncEventArgs();
+        userlist.TryRemove(userip[ipstr], out o);
+        var stemp = "";
+        userip.TryRemove(ipstr, out stemp);
+
+      }
+
+    }
     private static byte[] CombomBinaryArray(byte[] srcArray1, byte[] srcArray2)
     {
       //根据要合并的两个数组元素总数新建一个数组
@@ -73,12 +100,12 @@ namespace Iocp
         {
 
           case "000506"://系统新的连接接入，还没有任何消息
-            socketserver.NewConnect(SocketArg);
+            //.NewConnect(SocketArg);
             //  socketserver.RemoveZombieSocketAsyncEventArgs(SocketArg.ReceiveEventArgs);//针对Socket服务器,用户发送注册命令的时候从 僵尸字典里移除.很重要，只要身份注册后就需要调用
             break;
           case "000505"://掉线处理
 
-            socketserver.ConnectDown(SocketArg); //掉线处理，服务资源回收
+            //socketserver.ConnectDown(SocketArg); //掉线处理，服务资源回收
 
             var ipstr = SocketArg.IpportStr;
             var aaaa = new byte[0];

@@ -1,5 +1,5 @@
 ﻿
-#define buzhanbao
+#define zhanbao
 
 
 //#define zhanbao
@@ -19,7 +19,7 @@ namespace onezl.iocp
 {
 
   public delegate void ReceiveEventHandler(AsyncSocketUserToken SocketArg, byte[] byteArr);
-  public delegate void DownLineHandler(AsyncSocketUserToken SocketArg, byte[] byteArr);
+  public delegate void DownLineHandler(AsyncSocketUserToken SocketArg);
 
   /// <summary> 基于SocketAsyncEventArgs 实现 IOCP 服务器 
   /// <para>注:加入多队列处理机制,目前只应用于Socket服务器.</para>
@@ -634,6 +634,16 @@ namespace onezl.iocp
                   {
                     this.ProcessReceive(ioContext);
                   }
+                  try
+                  {
+                    PutEnqueueItemBySys(ioContext, e.RemoteEndPoint.ToString(), "newconnect");
+                  }
+                  catch (Exception expp)
+                  {
+
+                    Logger.WriteLog("PutEnqueueItemBySys newconnect exp: "+expp.Message);
+                  }
+                
 
                 }
                 //else        //已经达到最大客户连接数量，在这接受连接，发送“连接已经达到最大数”，然后断开连接
@@ -688,7 +698,7 @@ namespace onezl.iocp
 
 
                 //}
-                
+              
 
               }
               
@@ -796,6 +806,21 @@ namespace onezl.iocp
 
     private void AllDownLine(Socket s, SocketAsyncEventArgs e)
     {
+      ReduceConnectsock();
+
+      string ipport = string.Empty;
+      try
+      {
+     
+        ipport = s.RemoteEndPoint.ToString();
+      }
+      catch (Exception ex)//说明是客户端还连接着,服务器端主动断开。
+      {
+        return;
+
+      }
+      PutEnqueueItemBySys(e, ipport,"downline");
+
     }
 
     /// <summary>接收数据后的处理
@@ -858,7 +883,7 @@ namespace onezl.iocp
               }
               else//客户端主动断开 或者 客户端未断开连接而服务器端主动断开。
               {
-                this.CloseClientSocket(e);
+                this.ProcessError(e);
               }
             }
             catch (Exception ex)
@@ -903,9 +928,19 @@ namespace onezl.iocp
     /// <param name="e"></param>
     private void ProcessError(SocketAsyncEventArgs e)
     {
-      Socket s = e.UserToken as Socket;
-      IPEndPoint localEp = s.LocalEndPoint as IPEndPoint;
-      this.AllDownLine(s, e);
+      Socket s = null;
+      try
+      {
+        s = e.UserToken as Socket;
+      }
+      catch
+      {
+
+      }
+      finally
+      {
+        this.AllDownLine(s, e);
+      }
     }
     #endregion
 
@@ -1007,35 +1042,39 @@ namespace onezl.iocp
               // List<byte[]> listcompletebt = StickingBag.MakeStickingBag(asyncUserToken.ReceiveBuffer, asyncUserToken.IpportStr, GetDicBuffer(asyncUserToken.QueueId));
 
 #if zhanbao
-              if (asyncUserToken.issystemorder == '0')
+
+
+              switch (asyncUserToken.issystemorder)
               {
-                List<byte[]> listcompletebt = StickingBag.MakeStickingBag(asyncUserToken.ReceiveBuffer, asyncUserToken.IpportStr, GetDicBuffer(asyncUserToken.QueueId));
-                for (int i = 0; i < listcompletebt.Count; i++)
-                {
-                  if (ReceiveEvent != null)
+                case "0":
+                  List<byte[]> listcompletebt = StickingBag.MakeStickingBag(asyncUserToken.ReceiveBuffer, asyncUserToken.IpportStr, GetDicBuffer(asyncUserToken.QueueId));
+                  for (int i = 0; i < listcompletebt.Count; i++)
                   {
-                    try
+                    if (ReceiveEvent != null)
                     {
-                      ReceiveEvent(asyncUserToken, listcompletebt[i]);
-                    }
-                    catch (Exception ex)
-                    {
-                      Logger.WriteLog("DoWorkForQueue677:" + ex.Message);
+                      try
+                      {
+                        ReceiveEvent(asyncUserToken, listcompletebt[i]);
+                      }
+                      catch (Exception ex)
+                      {
+                        Logger.WriteLog("DoWorkForQueue677:" + ex.Message);
+                      }
                     }
                   }
-                }
+              
+              break;
+                case "downline":
+                  ConnectDown(asyncUserToken);//清空粘包缓存区,和僵尸连接
+                  DownLineEvent(asyncUserToken);                
+                  break; 
+                  case "newconnect":
+                  this.CleandicBuffer(asyncUserToken.QueueId, asyncUserToken.IpportStr);//清空粘包缓存区
+                  break;
+                default:
+                  break;
               }
-              else //系统的约定
-              {
-                try
-                {
-                  ReceiveEvent(asyncUserToken, asyncUserToken.ReceiveBuffer);
-                }
-                catch (Exception ex)
-                {
-                  Logger.WriteLog("DoWorkForQueue677:" + ex.Message);
-                }
-              }
+
 #endif
 
 
@@ -1043,7 +1082,22 @@ namespace onezl.iocp
 #if buzhanbao
               try
               {
-                ReceiveEvent(asyncUserToken, asyncUserToken.ReceiveBuffer);
+                switch (asyncUserToken.issystemorder)
+                {
+                  case "0":
+                    ReceiveEvent(asyncUserToken, asyncUserToken.ReceiveBuffer);
+                    break;
+                  case "downline":
+               ConnectDown(asyncUserToken);//清空粘包缓存区
+                    DownLineEvent(asyncUserToken);
+                    break;
+               case "newconnect":
+                  this.CleandicBuffer(asyncUserToken.QueueId, asyncUserToken.IpportStr);//清空粘包缓存区
+                  break;
+                  default:
+                    break;
+                }
+               
               }
               catch (Exception ex)
               {
@@ -1053,7 +1107,7 @@ namespace onezl.iocp
 
 
 
-          
+
 
             }
           }
@@ -1251,175 +1305,44 @@ namespace onezl.iocp
     /// 连接掉线处理，处理000505系统命令
     /// </summary>
     /// <param name="sck"></param>
-    public void ConnectDown(AsyncSocketUserToken sck)
+    private void ConnectDown(AsyncSocketUserToken sck)
     {
       this.CleandicBuffer(sck.QueueId, sck.IpportStr);//清空粘包缓存区
-      this.CloseClientSocketTopool((sck.ReceiveEventArgs.UserToken as Socket),
-                sck.ReceiveEventArgs);// //把异步对象清空，投入异步对象池中重新利用
-    }
-    #endregion
-    #region 处理000506系统命令，新的连接接入处理
-    /// <summary>
-    /// 新的连接接入,处理000506系统命令，新的连接接入处理
-    /// </summary>
-    /// <param name="sck"></param>
-    public void NewConnect(AsyncSocketUserToken sck)
-    {
-     this.CleandicBufferforConnect(sck.QueueId, sck.IpportStr, sck.ReceiveEventArgs); //清空粘包缓存区，并且返回池子
-    }
-    #endregion
-
-
-    #region  清空指定的粘包处理的缓存区（暂且不用，这个可做主动掉线处理）
-    /// <summary> 清空指定的粘包处理的缓存区
-    /// </summary>
-    /// <param name="QueueId">队列约定的id（找缓存区）</param>
-    /// <param name="IpportStr">（缓冲区索引，目前是ip加端口号）</param>
-    private void CleandicBufferforConnect(int QueueId, string IpportStr, SocketAsyncEventArgs e)
-    {
+     
       try
       {
-        if (GetDicBuffer(QueueId).ContainsKey(IpportStr))
-        {
-          DynamicBufferManager dy = new DynamicBufferManager();
-          GetDicBuffer(QueueId).TryRemove(IpportStr, out dy);
-          dy.Clear();
-          dy = null;
-        }
 
 
-        //try
-        //{
-        //    try
-        //    {
-        //        e.SetBuffer(e.Buffer, 0, e.Buffer.Length);
-        //        e.UserToken = null;
-        //        e.AcceptSocket = null;
-
-
-
-        //        ioContextPool.Push(e);
-
-
-        //    }
-        //    catch { }
-
-
-
-
-        //}
-        //catch
-        //{
-
-        //}
-
-
-
-
-
-
-
+        DateTime dt = new DateTime();
+        _zombieSocketAsyncEventArgsDic.TryRemove(sck.ReceiveEventArgs, out dt);
 
       }
       catch
       {
+
       }
     }
     #endregion
-
+    
+    
+    
     #region 关闭连接流程
 
     /// <summary>关闭socket连接
     /// </summary>
     /// <param name="e">SocketAsyncEventArg associated with the completed send/receive operation.</param>
-    private void CloseClientSocket(SocketAsyncEventArgs e)
-    {
-      Socket s =null;
-      try
-      {
-        s = e.UserToken as Socket;
-      }
-      catch
-      {
-
-      }
-      finally
-      {
-        this.AllDownLine(s, e);
-      }
-
-    }
-
-    /// <summary>向队列添加清空命令清除用户连接
-    /// </summary>
-    /// <param name="s"></param>
-    /// <param name="e"></param>
-    private void CloseClientSocket(Socket s, SocketAsyncEventArgs e)
-    {
-
-
-      string ipport = string.Empty;
-      try
-      {
-        ipport = s.RemoteEndPoint.ToString();
-      }
-      catch(Exception ex)//说明是客户端还连接着,服务器端主动断开。
-      {
-
-        PushSocketAsyncEventArgsToPool(e);
-        return;
-
-      }
-      PutEnqueueItemBySys(e, "000505", ipport);
-
-      //AsyncSocketUserToken asyncUserToken = null;
-      // try
-      // {
-      //     //创建释放粘包缓冲区的队列--start
-
-      //     byte[] oldByteArr = System.Text.Encoding.UTF8.GetBytes("000505");//000505是命令
-      //     byte[] newByteArr = GetByte(oldByteArr);
-
-      //     asyncUserToken = _asyncSocketUserTokenPool.Pop();
-      //     while (asyncUserToken == null)
-      //     {
-      //         asyncUserToken = _asyncSocketUserTokenPool.Pop();
-      //         if (asyncUserToken == null)
-      //         {
-      //             Thread.Sleep(10);
-      //             Logger.WriteLog("CloseClientSockett-IoServer-978弹出还是空");
-      //         }
-      //     }
-
-      //     int socketHandle = (e.UserToken as Socket).Handle.ToInt32();
-      //     asyncUserToken.ConnectSocketHandle = socketHandle;
-      //     asyncUserToken.ReceiveBuffer = newByteArr;//释放命令
-      //     asyncUserToken.ReceiveEventArgs = e;
-      //     asyncUserToken.IpportStr = ipport;
-
-      //     int revInt = ((socketHandle % 160) / 4);
-      //     asyncUserToken.QueueId = revInt;
-
-      //     _workQueueList[revInt].EnqueueItem(asyncUserToken);//加入队列
-
-      //     //创建释放粘包缓冲区的队列--end
-      // }
-      // catch
-      // {
-
-      // }
-    }
+   
+      
 
     //系统放置约定命令
-    private void PutEnqueueItemBySys(SocketAsyncEventArgs e, string strm, string ipport)
+    private void PutEnqueueItemBySys(SocketAsyncEventArgs e, string ipport, string issystemorder)
     {
 
       try
       {
         AsyncSocketUserToken asyncUserToken = null;
 
-        byte[] oldByteArr = System.Text.Encoding.UTF8.GetBytes(strm);//000505是命令
-                                                                     //byte[] newByteArr = GetByte(oldByteArr);
+        byte[] oldByteArr = System.Text.Encoding.UTF8.GetBytes("");
 
         asyncUserToken = GetAcceptSoc();
        
@@ -1436,7 +1359,7 @@ namespace onezl.iocp
 
 
         //系统标识
-        asyncUserToken.issystemorder = '1';
+        asyncUserToken.issystemorder = issystemorder;
         _workQueueList[revInt].EnqueueItem(asyncUserToken);//加入队列
 
         //创建释放粘包缓冲区的队列--end
@@ -1452,76 +1375,23 @@ namespace onezl.iocp
     /// </summary>
     /// <param name="s"></param>
     /// <param name="e"></param>
-    private void CloseClientSocketTopool(Socket s, SocketAsyncEventArgs e)
-    {
-      try
-      {
+    
 
-
-        DateTime dt = new DateTime();
-        _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
-        
-      }
-      catch
-      {
-
-      }
-    }
-
-     private void ShutdownSocket(Socket s, SocketAsyncEventArgs e)
+     public void ShutdownSocket(Socket s, SocketAsyncEventArgs e)
      {
        try{        
          s.Shutdown(SocketShutdown.Both);
-         s.Close();//当客户端未断开,服务器端调用Close方法时,会模拟客户端发送0字节到服务端,服务器端接收到,执行断开操作.
+         s.Close();
        }
        catch(Exception ex)
        {
-        //  try{
-        //     e.SetBuffer(e.Buffer, 0, e.Buffer.Length);
-        //    e.UserToken = null;
-        //    e.AcceptSocket = null;
-        //     DateTime dt = new DateTime();
-        //      _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
-        //        ioContextPool.Push(e);
-        //  }
-        //  catch(Exception exs){
-          
-        //  }
-
        }
         DateTime dt = new DateTime();
          _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
      
      }
 
-    #region 清除僵尸连接
-    /// <summary> 把SocketAsyncEventArgs放回到接收池里
-    /// </summary>
-    /// <param name="e"></param>
-    public void PushSocketAsyncEventArgsToPool(SocketAsyncEventArgs e)
-    {
-      try
-      {
-        try
-        {
-          DateTime dt = new DateTime();
-          _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
-
-
-        }
-        catch (InvalidOperationException ex)//报错的原因:清除僵尸socket后,把SocketAsyncEventArgs放回到池子里,又被其他的socket所使用,这个时候SetBuffer会报错.
-        {
-          Logger.WriteLog("PushSocketAsyncEventArgsToPool:  " + ex.Message);
-        }
-      }
-      catch (Exception ex)
-      {
-
-        
-      }
-      
-    }
-    #endregion
+    
 
     #endregion
 
