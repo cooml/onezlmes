@@ -722,7 +722,7 @@ namespace onezl.iocp
           }
           catch (Exception ex)
           {
-            Console.WriteLine("HandleAccept报的错:" + ex.Message);
+            Logger.WriteLog("HandleAccept报的错:" + ex.Message);
           }
         }
       }
@@ -898,7 +898,7 @@ namespace onezl.iocp
             }
             catch (Exception ex)
             {
-              Console.WriteLine("HandelRecive报的错:" + ex.Message);
+              Logger.WriteLog("HandelRecive报的错:" + ex.Message);
             }
           }
         }
