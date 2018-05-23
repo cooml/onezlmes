@@ -73,6 +73,8 @@
          }
          else
          {
+           console.log(event.data);
+          // document.getElementById('message').innerHTML = event.data;
            setMessageInnerHTML(event.data);
          }
        }
@@ -106,7 +108,7 @@
        function send() {
          var message = document.getElementById('text').value;
          if (message.lastIndexOf("@") > -1) {
-           for (var i = 0; i < 1000; i++) {
+           for (var i = 0; i < 5; i++) {
              websocket.send(message+"_"+i);
            }
          } else {
