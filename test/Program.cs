@@ -39,7 +39,7 @@ namespace Iocp
       var ipstr = SocketArg.IpportStr;
       var aaaa = new byte[0];
       websocketdatecahe.TryRemove(SocketArg.IpportStr, out aaaa);
-
+      Console.WriteLine("掉线客户端："+ipstr);
 
       if (userip.ContainsKey(ipstr))
       {
