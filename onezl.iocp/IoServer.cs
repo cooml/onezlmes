@@ -1382,9 +1382,9 @@ namespace onezl.iocp
 
         //创建释放粘包缓冲区的队列--end
       }
-      catch
+      catch(Exception exp)
       {
-
+        Logger.WriteLog("PutEnqueueItemBySys exp:" + exp.Message);
       }
 
     }
@@ -1397,19 +1397,41 @@ namespace onezl.iocp
 
      public void ShutdownSocket(Socket s, SocketAsyncEventArgs e)
      {
-       try{        
+     
+      try
+      {
+       
+        PutEnqueueItemBySys(e, s.RemoteEndPoint.ToString(), "downline");
+        
+      }
+      catch (Exception eaa)
+      {
+        Logger.WriteLog("ShutdownSocket exp"+eaa.Message);
+      }
+      
+      try
+      {        
          s.Shutdown(SocketShutdown.Both);
          s.Close();
        }
        catch(Exception ex)
        {
        }
+      try
+      {
         DateTime dt = new DateTime();
-         _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
+        _zombieSocketAsyncEventArgsDic.TryRemove(e, out dt);
+      }
+      catch
+      {
+      }
      
-     }
 
-    
+
+
+    }
+
+
 
     #endregion
 
