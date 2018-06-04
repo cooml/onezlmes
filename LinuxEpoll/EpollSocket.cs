@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define buzhanbao
+
+using System;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
