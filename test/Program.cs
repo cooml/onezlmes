@@ -81,7 +81,10 @@ namespace Iocp
       try
       {
 
-
+        if (byteArr.Length < 1)
+        {
+          return;
+        }
         //连接
 
         //socketserver.PushSendQue(SocketArg.ReceiveEventArgs, Encoding.UTF8.GetBytes("HTTP/1.1 200 OK\r\nContent-Type:text/html;charset=utf-8\r\nContent-Length:18\r\n\r\nWelcome to tinyweb"));
@@ -91,8 +94,12 @@ namespace Iocp
         string strAll = Encoding.UTF8.GetString(byteArr);
 
         //Console.WriteLine(strAll);
-        string appNum = strAll.Substring(0, 2);
-        string commandStr = strAll.Substring(0, 6);
+
+        string commandStr = "";
+        if (strAll.Length > 5)
+        {
+          commandStr = strAll.Substring(0, 6);
+        }      
         string str = strAll.Substring(6);
         string[] strs = str.Split(new string[] { "[f.ff]" }, StringSplitOptions.RemoveEmptyEntries);
 
