@@ -19,6 +19,18 @@ namespace onezl.iocp.com
       Capacity = capacity;
 
     }
+    public TValue GetOrExist(TKey key, out bool exist)
+    {
+      TValue value;
+      if (_cache.TryGetValue<TValue>(key, out value))
+      {
+        exist = true;
+        return value;
+      }
+      exist = false;
+
+      return value;
+    }
 
     public TValue GetOrAdd(TKey key, Func<TValue> valueGenerator)
     {

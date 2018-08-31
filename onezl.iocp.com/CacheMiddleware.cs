@@ -65,6 +65,24 @@ namespace onezl.iocp.com
     }
 
 
+    public TValue GetOrExist(TKey key, out bool exist)
+    {
+      try
+      {
+        return this.PrivateModdle_instance.GetOrExist(key, out exist);
+
+
+      }
+      catch (Exception ex)
+      {
+        LogHelper.WriteLog("CacheMiddleware.GetOrExist exp" + ex.Message + ex.Source);
+        exist = false;
+        return default(TValue);
+
+      }
+
+    }
+
     public TValue GetOrAdd(TKey key, Func<TValue> valueGenerator)
     {
       try
