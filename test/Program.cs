@@ -27,7 +27,7 @@ namespace Iocp
     {
       //test
       socketserver = new IoServer(15, 1024);
-      //////socketserver.Start("127.0.0.1", 6789);
+      ////////socketserver.Start("127.0.0.1", 6789);
       socketserver.Start(6789);
       socketserver.ReceiveEvent = new onezl.iocp.ReceiveEventHandler(myfuncion);
       socketserver.Name = "RegClean";
