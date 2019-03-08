@@ -21,6 +21,7 @@ namespace Iocp
     public static ConcurrentDictionary<string, byte[]> websocketdatecahe = new ConcurrentDictionary<string, byte[]>();
     public static ConcurrentDictionary<string, string> userip = new ConcurrentDictionary<string, string>();
     /// <summary>发送的socket
+    //main
     /// </summary>
     public static IoServer socketserver;
     static void Main(string[] args)
