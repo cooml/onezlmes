@@ -897,13 +897,6 @@ namespace eSupport.Indexer
                 }
                     
                 }
-            
-            
-
-
-               
-
-
 
 
              return 1;
