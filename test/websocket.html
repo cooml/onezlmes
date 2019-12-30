@@ -4,7 +4,7 @@
   <html>
    
   <head>
-    
+    <meta http-equiv="content-type" content="txt/html; charset=utf-8" />
     <title>c#后端WebSocket的Tomcat实现</title>
     <style>
   
@@ -18,7 +18,9 @@
       Welcome<br /><input id="text" type="text" />
       <button onclick="send()">发送消息</button>
       <span>注册用户发送：name:小李   &nbsp;&nbsp;&nbsp;针对某人发消息命令：@小李 你好啊现在在干嘛呢</span>
-      </div>
+	  <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务器： </span><input id="serverport" value="127.0.0.1:6789" />
+      &nbsp;&nbsp;&nbsp;<button id="reset" >重置ip和prot</button>
+	  </div>
    
        <br />
     <div style="border:1px solid #17acf8;height:500px;padding:3px;font-">
@@ -38,12 +40,16 @@
   </body>
   
   <script type="text/javascript">
+  function reload()
+	{
   
   
+       var ipport=document.getElementById("serverport").value;
+	    
        var websocket = null;
        //判断当前浏览器是否支持WebSocket
        if ('WebSocket' in window) {
-         websocket = new WebSocket("ws://127.0.0.1:6789");
+         websocket = new WebSocket("ws://"+ipport);
        }
        else {
            alert('当前浏览器 Not support websocket')
@@ -123,6 +129,12 @@
            send();  
          }
        }  
+	}
+	var reset=document.getElementById("reset");
+	    reset.onclick = function(){
+            reload();
+        }
+	reload();
    </script>
   
   </html>
