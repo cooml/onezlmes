@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "onezl.iocp.com", "onezl.iocp.com\onezl.iocp.com.csproj", "{CB2E8F80-16C4-440C-8829-A0A0B0EF2F73}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinuxEpoll", "LinuxEpoll\LinuxEpoll.csproj", "{D9D01EA8-B21F-4923-A241-0B2C5461B995}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "testLinuxEpoll", "testLinuxEpoll\testLinuxEpoll.csproj", "{AEAD00A8-886D-4973-A381-71F671FD13C4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnezlServer", "OnezlServer\OnezlServer.csproj", "{C6D4E6A5-99CC-433B-B65E-609181F048CB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnezlClient", "OnezlClient\OnezlClient.csproj", "{B45CC0A1-4E40-4617-91C7-FBCEB9EFC9B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{AEAD00A8-886D-4973-A381-71F671FD13C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEAD00A8-886D-4973-A381-71F671FD13C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEAD00A8-886D-4973-A381-71F671FD13C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6D4E6A5-99CC-433B-B65E-609181F048CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6D4E6A5-99CC-433B-B65E-609181F048CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6D4E6A5-99CC-433B-B65E-609181F048CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6D4E6A5-99CC-433B-B65E-609181F048CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B45CC0A1-4E40-4617-91C7-FBCEB9EFC9B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B45CC0A1-4E40-4617-91C7-FBCEB9EFC9B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B45CC0A1-4E40-4617-91C7-FBCEB9EFC9B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B45CC0A1-4E40-4617-91C7-FBCEB9EFC9B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
