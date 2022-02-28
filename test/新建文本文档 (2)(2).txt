@@ -1,0 +1,2277 @@
+{"mappings": {
+"common_type": {
+"dynamic": "true",
+"dynamic_templates": [ { "2_null": { "mapping": { "type": "long"},"match": "*_l"}},{ "3_null": { "mapping": { "type": "double"},"match": "*_d"}},{ "4_null": { "mapping": { "type": "obj"},"match": "*_obj"}},{ "5_null": { "mapping": { "type": "binary"},"match": "*_b"}},{ "6_aa": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_aa"}},{ "7_ab": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ab"}},{ "8_ae": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ae"}},{ "9_af": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_af"}},{ "10_ak": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ak"}},{ "11_am": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_am"}},{ "12_an": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_an"}},{ "13_ar": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "arabic","type": "text"}},"type": "text"},"match": "*_txt_ar"}},{ "14_as": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_as"}},{ "15_av": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_av"}},{ "16_ay": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ay"}},{ "17_az": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_az"}},{ "18_ba": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ba"}},{ "19_be": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_be"}},{ "20_bg": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "bulgarian","type": "text"}},"type": "text"},"match": "*_txt_bg"}},{ "21_bh": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_bh"}},{ "22_bi": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_bi"}},{ "23_bm": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_bm"}},{ "24_bn": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "bengali","type": "text"}},"type": "text"},"match": "*_txt_bn"}},{ "25_bo": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_bo"}},{ "26_br": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_br"}},{ "27_bs": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "persian","type": "text"}},"type": "text"},"match": "*_txt_bs"}},{ "28_ca": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ca"}},{ "29_ce": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ce"}},{ "30_ch": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ch"}},{ "31_co": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_co"}},{ "32_cr": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_cr"}},{ "33_cs": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "czech","type": "text"}},"type": "text"},"match": "*_txt_cs"}},{ "34_cu": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_cu"}},{ "35_cv": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_cv"}},{ "36_cy": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_cy"}},{ "37_da": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "danish","type": "text"}},"type": "text"},"match": "*_txt_da"}},{ "38_de": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "german","type": "text"}},"type": "text"},"match": "*_txt_de"}},{ "39_dv": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_dv"}},{ "40_dz": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_dz"}},{ "41_ee": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ee"}},{ "42_el": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "greek","type": "text"}},"type": "text"},"match": "*_txt_el"}},{ "43_en": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "english","type": "text"}},"type": "text"},"match": "*_txt_en"}},{ "44_eo": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_eo"}},{ "45_es": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "spanish","type": "text"}},"type": "text"},"match": "*_txt_es"}},{ "46_et": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_et"}},{ "47_eu": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "basque","type": "text"}},"type": "text"},"match": "*_txt_eu"}},{ "48_fa": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_fa"}},{ "49_ff": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ff"}},{ "50_fi": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "finnish","type": "text"}},"type": "text"},"match": "*_txt_fi"}},{ "51_fj": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_fj"}},{ "52_fo": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_fo"}},{ "53_fr": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "french","type": "text"}},"type": "text"},"match": "*_txt_fr"}},{ "54_fr-ca": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_fr-ca"}},{ "55_fy": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_fy"}},{ "56_ga": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "irish","type": "text"}},"type": "text"},"match": "*_txt_ga"}},{ "57_gd": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_gd"}},{ "58_gl": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "galician","type": "text"}},"type": "text"},"match": "*_txt_gl"}},{ "59_gn": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_gn"}},{ "60_gu": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_gu"}},{ "61_gv": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_gv"}},{ "62_ha": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ha"}},{ "63_he": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_he"}},{ "64_hi": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "hindi","type": "text"}},"type": "text"},"match": "*_txt_hi"}},{ "65_ho": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ho"}},{ "66_hr": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_hr"}},{ "67_ht": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ht"}},{ "68_hu": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "hungarian","type": "text"}},"type": "text"},"match": "*_txt_hu"}},{ "69_hy": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_hy"}},{ "70_hz": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_hz"}},{ "71_ia": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ia"}},{ "72_id": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "indonesian","type": "text"}},"type": "text"},"match": "*_txt_id"}},{ "73_ie": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ie"}},{ "74_ig": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ig"}},{ "75_ii": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ii"}},{ "76_ik": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ik"}},{ "77_io": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_io"}},{ "78_is": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_is"}},{ "79_it": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "italian","type": "text"}},"type": "text"},"match": "*_txt_it"}},{ "80_iu": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_iu"}},{ "81_ja": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "kuromoji","type": "text"}},"type": "text"},"match": "*_txt_ja"}},{ "82_jv": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_jv"}},{ "83_ka": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ka"}},{ "84_kg": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "sorani","type": "text"}},"type": "text"},"match": "*_txt_kg"}},{ "85_ki": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ki"}},{ "86_kj": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_kj"}},{ "87_kk": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_kk"}},{ "88_kl": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_kl"}},{ "89_km": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_km"}},{ "90_kn": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_kn"}},{ "91_ko": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "cjk","type": "text"}},"type": "text"},"match": "*_txt_ko"}},{ "92_kr": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_kr"}},{ "93_ks": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ks"}},{ "94_ku": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ku"}},{ "95_kv": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_kv"}},{ "96_kw": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_kw"}},{ "97_ky": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ky"}},{ "98_la": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_la"}},{ "99_lb": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_lb"}},{ "100_lg": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_lg"}},{ "101_li": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_li"}},{ "102_ln": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ln"}},{ "103_lo": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_lo"}},{ "104_lt": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "lithuanian","type": "text"}},"type": "text"},"match": "*_txt_lt"}},{ "105_lu": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_lu"}},{ "106_lv": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "latvian","type": "text"}},"type": "text"},"match": "*_txt_lv"}},{ "107_mg": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_mg"}},{ "108_mh": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_mh"}},{ "109_mi": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_mi"}},{ "110_mk": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_mk"}},{ "111_ml": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ml"}},{ "112_mn": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_mn"}},{ "113_mr": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_mr"}},{ "114_ms": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ms"}},{ "115_mt": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_mt"}},{ "116_my": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_my"}},{ "117_na": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_na"}},{ "118_nb": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "norwegian","type": "text"}},"type": "text"},"match": "*_txt_nb"}},{ "119_nd": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_nd"}},{ "120_ne": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ne"}},{ "121_ng": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ng"}},{ "122_nl": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "dutch","type": "text"}},"type": "text"},"match": "*_txt_nl"}},{ "123_nn": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_nn"}},{ "124_no": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_no"}},{ "125_nr": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_nr"}},{ "126_nv": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_nv"}},{ "127_ny": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ny"}},{ "128_oc": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_oc"}},{ "129_oj": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_oj"}},{ "130_om": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_om"}},{ "131_or": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_or"}},{ "132_os": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_os"}},{ "133_pa": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_pa"}},{ "134_pi": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_pi"}},{ "135_pl": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_pl"}},{ "136_ps": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ps"}},{ "137_pt": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_pt"}},{ "138_pt-pt": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "portuguese","type": "text"}},"type": "text"},"match": "*_txt_pt-pt"}},{ "139_qu": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_qu"}},{ "140_rc": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_rc"}},{ "141_rm": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_rm"}},{ "142_rn": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_rn"}},{ "143_ro": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "romanian","type": "text"}},"type": "text"},"match": "*_txt_ro"}},{ "144_ru": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "russian","type": "text"}},"type": "text"},"match": "*_txt_ru"}},{ "145_rw": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_rw"}},{ "146_sa": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_sa"}},{ "147_sc": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_sc"}},{ "148_sd": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_sd"}},{ "149_se": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_se"}},{ "150_sg": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_sg"}},{ "151_si": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_si"}},{ "152_sk": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_sk"}},{ "153_sl": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_sl"}},{ "154_sm": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_sm"}},{ "155_sn": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_sn"}},{ "156_so": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_so"}},{ "157_sq": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_sq"}},{ "158_sr": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_sr"}},{ "159_ss": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ss"}},{ "160_st": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_st"}},{ "161_su": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_su"}},{ "162_sv": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "swedish","type": "text"}},"type": "text"},"match": "*_txt_sv"}},{ "163_sw": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_sw"}},{ "164_ta": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ta"}},{ "165_te": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_te"}},{ "166_tg": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_tg"}},{ "167_th": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "thai","type": "text"}},"type": "text"},"match": "*_txt_th"}},{ "168_ti": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ti"}},{ "169_tk": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_tk"}},{ "170_tl": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_tl"}},{ "171_tn": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_tn"}},{ "172_to": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_to"}},{ "173_tr": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "turkish","type": "text"}},"type": "text"},"match": "*_txt_tr"}},{ "174_ts": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ts"}},{ "175_tt": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_tt"}},{ "176_tw": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_tw"}},{ "177_ty": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ty"}},{ "178_ug": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ug"}},{ "179_uk": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_uk"}},{ "180_ur": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ur"}},{ "181_uz": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_uz"}},{ "182_ve": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_ve"}},{ "183_vi": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_vi"}},{ "184_vo": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_vo"}},{ "185_wa": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_wa"}},{ "186_wo": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_wo"}},{ "187_xh": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_xh"}},{ "188_yi": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_yi"}},{ "189_yo": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_yo"}},{ "190_za": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_za"}},{ "191_zh": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "max","type": "text"}},"type": "text"},"match": "*_txt_zh"}},{ "192_zh-cn": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "max","type": "text"}},"type": "text"},"match": "*_txt_zh-cn"}},{ "193_zh-hk": { "mapping": { "analyzer": "standard","fields": { "rw": { "analyzer": "max","type": "text"}},"type": "text"},"match": "*_txt_zh-hk"}},{ "194_zu": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_zu"}},{ "195_nb-no": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_nb-no"}},{ "196_es-es": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_es-es"}},{ "197_sh": { "mapping": { "analyzer": "standard","type": "text"},"match": "*_txt_sh"}},{ "198_null": { "mapping": { "type": "keyword"},"match": "*_s"}},{ "199_null": { "mapping": { "type": "date"},"match": "*_dt"}},{ "200_null": { "mapping": { "type": "date_range"},"match": "*_dtr"}},{ "201_null": { "mapping": { "type": "boolean"},"match": "*_bl"}},{ "202_null": { "mapping": { "type": "integer"},"match": "*_i"}},{ "203_null": { "mapping": { "type": "long_range"},"match": "*_lr"}},{ "204_null": { "mapping": { "type": "double_range"},"match": "*_dr"}}],
+"properties": {
+"ProductGroup": {
+"type": "keyword"
+},
+"Metadata_txt_fa": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid_txt_ja": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "kuromoji",
+"type": "text"
+}
+}
+},
+"Name_txt_sv": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "swedish",
+"type": "text"
+}
+}
+},
+"Metadata_txt_vi": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_sr": {
+"analyzer": "standard",
+"type": "text"
+},
+"loyaltySymbol": {
+"type": "long"
+},
+"Docid_txt_zh-hk": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Metadata_txt_et": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_es": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "spanish",
+"type": "text"
+}
+}
+},
+"Docid_txt_zh": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Metadata_txt_en": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "english",
+"type": "text"
+}
+}
+},
+"Name_txt_th": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "thai",
+"type": "text"
+}
+}
+},
+"Metadata_txt_el": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "greek",
+"type": "text"
+}
+}
+},
+"Docid_txt_it": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "italian",
+"type": "text"
+}
+}
+},
+"Name_txt_cs": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "czech",
+"type": "text"
+}
+}
+},
+"Docid_txt_is": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_ta": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_bn": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_nl": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "dutch",
+"type": "text"
+}
+}
+},
+"BoostTag_s": {
+"type": "keyword"
+},
+"Categories": {
+"type": "keyword"
+},
+"Body_txt_nn": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_bg": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "bulgarian",
+"type": "text"
+}
+}
+},
+"cartId": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Name_txt_ru": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "russian",
+"type": "text"
+}
+}
+},
+"Roles": {
+"type": "keyword"
+},
+"Body_txt_nb": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "norwegian",
+"type": "text"
+}
+}
+},
+"Docid_txt_id": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "indonesian",
+"type": "text"
+}
+}
+},
+"Description_txt_he": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_ro": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "romanian",
+"type": "text"
+}
+}
+},
+"Docid_txt_hu": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "hungarian",
+"type": "text"
+}
+}
+},
+"Archive_s": {
+"type": "keyword"
+},
+"Description_txt_hi": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "hindi",
+"type": "text"
+}
+}
+},
+"Name_txt_sl": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_fr": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "french",
+"type": "text"
+}
+}
+},
+"Name_txt_sk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_sh": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_bs": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "persian",
+"type": "text"
+}
+}
+},
+"Description_txt_hr": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_br": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_fi": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "finnish",
+"type": "text"
+}
+}
+},
+"customerAccount": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Body_txt_zh-cn": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Description_txt_hu": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "hungarian",
+"type": "text"
+}
+}
+},
+"Docid_txt_hr": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid_txt_he": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_tr": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "turkish",
+"type": "text"
+}
+}
+},
+"Metadata_txt_da": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "danish",
+"type": "text"
+}
+}
+},
+"Name_txt_en": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "english",
+"type": "text"
+}
+}
+},
+"Name_txt_el": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "greek",
+"type": "text"
+}
+}
+},
+"Docid_txt_hi": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "hindi",
+"type": "text"
+}
+}
+},
+"Description_txt_uk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Metadata_txt_th": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "thai",
+"type": "text"
+}
+}
+},
+"Description_txt_ur": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_ur": {
+"analyzer": "standard",
+"type": "text"
+},
+"paymentType": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Metadata_txt_cs": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "czech",
+"type": "text"
+}
+}
+},
+"Name_txt_fa": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_ta": {
+"analyzer": "standard",
+"type": "text"
+},
+"OperatingSystems": {
+"type": "keyword"
+},
+"Body_txt_ar": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "arabic",
+"type": "text"
+}
+}
+},
+"customerId": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Description_txt_el": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "greek",
+"type": "text"
+}
+}
+},
+"Name_txt_vi": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_af": {
+"analyzer": "standard",
+"type": "text"
+},
+"Description_txt_en": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "english",
+"type": "text"
+}
+}
+},
+"Metadata_txt_zh-cn": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Metadata_txt_sv": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "swedish",
+"type": "text"
+}
+}
+},
+"Name_txt_et": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_es": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "spanish",
+"type": "text"
+}
+}
+},
+"Description_txt_es": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "spanish",
+"type": "text"
+}
+}
+},
+"Description_txt_et": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_pl": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_ur": {
+"analyzer": "standard",
+"type": "text"
+},
+"salesApplication": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Description_txt_vi": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_uk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_de": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "german",
+"type": "text"
+}
+}
+},
+"storeId": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Description_txt_fa": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_tr": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "turkish",
+"type": "text"
+}
+}
+},
+"Name_txt_da": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "danish",
+"type": "text"
+}
+}
+},
+"Description_txt_fi": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "finnish",
+"type": "text"
+}
+}
+},
+"createTime": {
+"type": "long"
+},
+"Name_txt_uk": {
+"analyzer": "standard",
+"type": "text"
+},
+"_lw_data_source_pipeline_s": {
+"type": "keyword"
+},
+"Body_txt_pt": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid_txt_fr": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "french",
+"type": "text"
+}
+}
+},
+"Description_txt_fr": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "french",
+"type": "text"
+}
+}
+},
+"Metadata_txt_de": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "german",
+"type": "text"
+}
+}
+},
+"Body_txt_sr": {
+"analyzer": "standard",
+"type": "text"
+},
+"country": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Description_txt_br": {
+"analyzer": "standard",
+"type": "text"
+},
+"Description_txt_bs": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "persian",
+"type": "text"
+}
+}
+},
+"Metadata_txt_ro": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "romanian",
+"type": "text"
+}
+}
+},
+"orderNumber": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Body_txt_sv": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "swedish",
+"type": "text"
+}
+}
+},
+"Docid_txt_fi": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "finnish",
+"type": "text"
+}
+}
+},
+"Countries": {
+"type": "keyword"
+},
+"Description_txt_sh": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_sh": {
+"analyzer": "standard",
+"type": "text"
+},
+"Description_txt_sk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Description_txt_sl": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid_txt_fa": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_sl": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_sk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_ar": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "arabic",
+"type": "text"
+}
+}
+},
+"Name": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Docid_txt_et": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_pl": {
+"analyzer": "standard",
+"type": "text"
+},
+"Description_txt_sr": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_ta": {
+"analyzer": "standard",
+"type": "text"
+},
+"emailAddress": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Docid_txt_es": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "spanish",
+"type": "text"
+}
+}
+},
+"Docid_txt_vi": {
+"analyzer": "standard",
+"type": "text"
+},
+"Description_txt_sv": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "swedish",
+"type": "text"
+}
+}
+},
+"Body_txt_cs": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "czech",
+"type": "text"
+}
+}
+},
+"Docid_txt_el": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "greek",
+"type": "text"
+}
+}
+},
+"Metadata_txt_af": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid_txt_en": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "english",
+"type": "text"
+}
+}
+},
+"Description_txt_ta": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_sr": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_ro": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "romanian",
+"type": "text"
+}
+}
+},
+"Description_txt_cs": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "czech",
+"type": "text"
+}
+}
+},
+"Docid_txt_ur": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_ru": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "russian",
+"type": "text"
+}
+}
+},
+"ProductsGuid_ss": {
+"type": "keyword"
+},
+"Description_txt_th": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "thai",
+"type": "text"
+}
+}
+},
+"Metadata_txt_sl": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_sk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid_txt_uk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_sh": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_nn": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_nl": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "dutch",
+"type": "text"
+}
+}
+},
+"Description_txt_da": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "danish",
+"type": "text"
+}
+}
+},
+"Metadata_txt_bs": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "persian",
+"type": "text"
+}
+}
+},
+"Brand": {
+"type": "keyword"
+},
+"Description_txt_tr": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "turkish",
+"type": "text"
+}
+}
+},
+"Metadata_txt_br": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_bn": {
+"analyzer": "standard",
+"type": "text"
+},
+"Description_txt_de": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "german",
+"type": "text"
+}
+}
+},
+"Metadata_txt_bn": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_bs": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "persian",
+"type": "text"
+}
+}
+},
+"Body_txt_br": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_bg": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "bulgarian",
+"type": "text"
+}
+}
+},
+"Metadata_txt_bg": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "bulgarian",
+"type": "text"
+}
+}
+},
+"Metadata_txt_ru": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "russian",
+"type": "text"
+}
+}
+},
+"_params": {
+"type": "object"
+},
+"Body_txt_ur": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid_txt_da": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "danish",
+"type": "text"
+}
+}
+},
+"Docid_txt_tr": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "turkish",
+"type": "text"
+}
+}
+},
+"Metadata_txt_pl": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid_txt_de": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "german",
+"type": "text"
+}
+}
+},
+"Name_txt_af": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_uk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_et": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_es": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "spanish",
+"type": "text"
+}
+}
+},
+"Docid_txt_cs": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "czech",
+"type": "text"
+}
+}
+},
+"Docid_txt_ta": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_vi": {
+"analyzer": "standard",
+"type": "text"
+},
+"Language": {
+"type": "keyword"
+},
+"Docid_txt_th": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "thai",
+"type": "text"
+}
+}
+},
+"Description_txt_af": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_el": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "greek",
+"type": "text"
+}
+}
+},
+"Name_txt_ar": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "arabic",
+"type": "text"
+}
+}
+},
+"Body_txt_en": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "english",
+"type": "text"
+}
+}
+},
+"Docid_txt_sr": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_tr": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "turkish",
+"type": "text"
+}
+}
+},
+"Body_txt_da": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "danish",
+"type": "text"
+}
+}
+},
+"Description_txt_ar": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "arabic",
+"type": "text"
+}
+}
+},
+"Docid_txt_sv": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "swedish",
+"type": "text"
+}
+}
+},
+"Body_txt_de": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "german",
+"type": "text"
+}
+}
+},
+"Name_txt_pt": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid_txt_sk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid_txt_sh": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_th": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "thai",
+"type": "text"
+}
+}
+},
+"Docid_txt_sl": {
+"analyzer": "standard",
+"type": "text"
+},
+"Description_txt_ro": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "romanian",
+"type": "text"
+}
+}
+},
+"Docid_txt_br": {
+"analyzer": "standard",
+"type": "text"
+},
+"Description_txt_ru": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "russian",
+"type": "text"
+}
+}
+},
+"Docid_txt_bs": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "persian",
+"type": "text"
+}
+}
+},
+"Description_txt_bg": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "bulgarian",
+"type": "text"
+}
+}
+},
+"Docid_txt_bg": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "bulgarian",
+"type": "text"
+}
+}
+},
+"Metadata_txt_pt": {
+"analyzer": "standard",
+"type": "text"
+},
+"businessType": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Docid_txt_bn": {
+"analyzer": "standard",
+"type": "text"
+},
+"Description_txt_bn": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_nn": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid_txt_ro": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "romanian",
+"type": "text"
+}
+}
+},
+"Metadata_txt_nl": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "dutch",
+"type": "text"
+}
+}
+},
+"Docid_txt_ru": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "russian",
+"type": "text"
+}
+}
+},
+"Name_txt_ko": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "cjk",
+"type": "text"
+}
+}
+},
+"Name_txt_km": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_nb": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "norwegian",
+"type": "text"
+}
+}
+},
+"Name_txt_kk": {
+"analyzer": "standard",
+"type": "text"
+},
+"BusinessUnit_ss": {
+"type": "keyword"
+},
+"Docid_txt_ar": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "arabic",
+"type": "text"
+}
+}
+},
+"Docid_txt_af": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_ms": {
+"analyzer": "standard",
+"type": "text"
+},
+"id": {
+"type": "keyword"
+},
+"Body_txt_fi": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "finnish",
+"type": "text"
+}
+}
+},
+"teleOrderCategory": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Body_txt_fa": {
+"analyzer": "standard",
+"type": "text"
+},
+"Description_txt_pl": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_fr": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "french",
+"type": "text"
+}
+}
+},
+"Metadata_txt_zh-hk": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Description_txt_pt": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_ka": {
+"analyzer": "standard",
+"type": "text"
+},
+"Alias_txt_en": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "english",
+"type": "text"
+}
+}
+},
+"Description": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Description_txt_zh-hk": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Docid_txt_pt": {
+"analyzer": "standard",
+"type": "text"
+},
+"OId_s": {
+"type": "keyword"
+},
+"Name_txt_ms": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_id": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "indonesian",
+"type": "text"
+}
+}
+},
+"Docid_txt_pl": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_mk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Description_txt_mk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_zh": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Description_txt_ms": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_nb": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "norwegian",
+"type": "text"
+}
+}
+},
+"Body_txt_it": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "italian",
+"type": "text"
+}
+}
+},
+"Metadata_txt_ko": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "cjk",
+"type": "text"
+}
+}
+},
+"Body_txt_is": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_km": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_he": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_mk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_lv": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "latvian",
+"type": "text"
+}
+}
+},
+"ProductsGuid_txt_en": {
+"type": "keyword"
+},
+"Name_txt_lt": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "lithuanian",
+"type": "text"
+}
+}
+},
+"Body_txt_hi": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "hindi",
+"type": "text"
+}
+}
+},
+"Description_txt_nb": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "norwegian",
+"type": "text"
+}
+}
+},
+"Popularity": {
+"type": "integer"
+},
+"Description_txt_nl": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "dutch",
+"type": "text"
+}
+}
+},
+"Body_txt_hu": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "hungarian",
+"type": "text"
+}
+}
+},
+"Description_txt_nn": {
+"analyzer": "standard",
+"type": "text"
+},
+"Type": {
+"type": "keyword"
+},
+"SourceData_s": {
+"type": "keyword"
+},
+"Metadata_txt_lv": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "latvian",
+"type": "text"
+}
+}
+},
+"Metadata_txt_lt": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "lithuanian",
+"type": "text"
+}
+}
+},
+"Name_txt_zh-cn": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"teleSymbol": {
+"type": "long"
+},
+"Body_txt_hr": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid_txt_nn": {
+"analyzer": "standard",
+"type": "text"
+},
+"Products": {
+"type": "keyword"
+},
+"Docid_txt_nl": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "dutch",
+"type": "text"
+}
+}
+},
+"Body_txt_km": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_kk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Description_txt_ka": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_ka": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_ja": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "kuromoji",
+"type": "text"
+}
+}
+},
+"_lw_data_source_collection_s": {
+"type": "keyword"
+},
+"Description_txt_kk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_zh": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Description_txt_km": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid_txt_nb": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "norwegian",
+"type": "text"
+}
+}
+},
+"Metadata_txt_it": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "italian",
+"type": "text"
+}
+}
+},
+"Description_txt_ko": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "cjk",
+"type": "text"
+}
+}
+},
+"Metadata_txt_is": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body_txt_zh-hk": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Body_txt_ko": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "cjk",
+"type": "text"
+}
+}
+},
+"Docid_txt_ms": {
+"analyzer": "standard",
+"type": "text"
+},
+"_lw_data_source_type_s": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Metadata_txt_kk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_fr": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "french",
+"type": "text"
+}
+}
+},
+"_lang": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"_lw_data_source_s": {
+"type": "keyword"
+},
+"Docid_txt_mk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Released": {
+"type": "date"
+},
+"Updated": {
+"type": "date"
+},
+"Thumbnail_s": {
+"type": "keyword"
+},
+"Body_txt_ja": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "kuromoji",
+"type": "text"
+}
+}
+},
+"Name_txt_fi": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "finnish",
+"type": "text"
+}
+}
+},
+"Metadata_txt_ka": {
+"analyzer": "standard",
+"type": "text"
+},
+"NoIndex_s": {
+"type": "keyword"
+},
+"Description_txt_zh-cn": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Docid_txt_zh-cn": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Docid_txt_lt": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "lithuanian",
+"type": "text"
+}
+}
+},
+"Description_txt_lt": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "lithuanian",
+"type": "text"
+}
+}
+},
+"Alias_txt_zh-cn": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Description_txt_lv": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "latvian",
+"type": "text"
+}
+}
+},
+"Docid_txt_lv": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "latvian",
+"type": "text"
+}
+}
+},
+"Body_txt_mk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Docid": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"MetaKeyword": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Name_txt_it": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "italian",
+"type": "text"
+}
+}
+},
+"Name_txt_is": {
+"analyzer": "standard",
+"type": "text"
+},
+"Metadata_txt_he": {
+"analyzer": "standard",
+"type": "text"
+},
+"orderStatus": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Description_txt_id": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "indonesian",
+"type": "text"
+}
+}
+},
+"Name_txt_ja": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "kuromoji",
+"type": "text"
+}
+}
+},
+"Body_txt_ms": {
+"analyzer": "standard",
+"type": "text"
+},
+"storeName": {
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Description_txt_is": {
+"analyzer": "standard",
+"type": "text"
+},
+"Body": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Description_txt_it": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "italian",
+"type": "text"
+}
+}
+},
+"Name_txt_zh": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Description_txt_zh": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Docid_txt_kk": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_hr": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_zh-hk": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "max",
+"type": "text"
+}
+}
+},
+"Docid_txt_ko": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "cjk",
+"type": "text"
+}
+}
+},
+"Metadata_txt_id": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "indonesian",
+"type": "text"
+}
+}
+},
+"Docid_txt_km": {
+"analyzer": "standard",
+"type": "text"
+},
+"bType_s": {
+"type": "keyword"
+},
+"Description_txt_ja": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "kuromoji",
+"type": "text"
+}
+}
+},
+"Docid_txt_ka": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_hi": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "hindi",
+"type": "text"
+}
+}
+},
+"Name_txt_he": {
+"analyzer": "standard",
+"type": "text"
+},
+"Name_txt_id": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "indonesian",
+"type": "text"
+}
+}
+},
+"Metadata_txt_hu": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "hungarian",
+"type": "text"
+}
+}
+},
+"MetaKeyword_txt_es": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "spanish",
+"type": "text"
+}
+}
+},
+"Alias": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"keyword": {
+"ignore_above": 256,
+"type": "keyword"
+}
+}
+},
+"Metadata_txt_hr": {
+"analyzer": "standard",
+"type": "text"
+},
+"_dict": {
+"analyzer": "ignorecase",
+"type": "text"
+},
+"Body_txt_lv": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "latvian",
+"type": "text"
+}
+}
+},
+"MetaKeyword_txt_en": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "english",
+"type": "text"
+}
+}
+},
+"Body_txt_lt": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "lithuanian",
+"type": "text"
+}
+}
+},
+"Metadata_txt_hi": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "hindi",
+"type": "text"
+}
+}
+},
+"Name_txt_hu": {
+"analyzer": "standard",
+"type": "text",
+"fields": {
+"rw": {
+"analyzer": "hungarian",
+"type": "text"
+}
+}
+}
+}
+}
+}}
